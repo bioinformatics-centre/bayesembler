@@ -5,7 +5,7 @@ The Bayesembler is a Bayesian method for doing transcriptome assembly from RNA-s
 ## Installing the Bayesembler
 The Bayesembler runs on both Linux and OS X and is freely available under the [MIT License](http://opensource.org/licenses/MIT).
 ### Static builds 
-* Linux x86_64 ([latest release](https://github.com/bioinformatics-centre/bayesembler/releases/download/v1.1.1/Bayesembler_v1.1.1_Linux_x86_64.tar.gz))
+* Linux x86_64 ([latest release](https://github.com/bioinformatics-centre/bayesembler/releases/download/v1.1.1/bayesembler_v1.1.1_linux_x86_64.tar.gz))
 * OS X x86_64 (will be available soon)
 
 ### Building the Bayesembler from source using CMake
