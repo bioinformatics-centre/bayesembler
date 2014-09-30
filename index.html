@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Bayesembler : Bayesian transcriptome assembly">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Bayesembler</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/bioinformatics-centre/bayesembler">View on GitHub</a>
+
+          <h1 id="project_title">Bayesembler</h1>
+          <h2 id="project_tagline">Bayesian transcriptome assembly</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/bioinformatics-centre/bayesembler/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/bioinformatics-centre/bayesembler/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>The Bayesembler is a Bayesian method for doing transcriptome assembly from RNA-seq data.</p>
+
+<h2>
+<a name="news" class="anchor" href="#news"><span class="octicon octicon-link"></span></a>News</h2>
+
+<ul>
+<li>
+<strong>September 4, 2014:</strong> The Bayesembler manuscript has been accepted for publication. Citation information will follow upon publication.</li>
+</ul><h2>
+<a name="in-the-making" class="anchor" href="#in-the-making"><span class="octicon octicon-link"></span></a>In the making</h2>
+
+<p>We are currently working on implementing the following features:</p>
+
+<ul>
+<li>New splice-graph engine (we currently rely on a third party engine) that will support combining replicates for splice-graph assembly</li>
+<li>Single-end read support</li>
+<li>Support for other mappers (e.g. STAR)</li>
+<li>Improved support for unstranded data (assembly accuracy on unstranded data is currently not optimal)</li>
+<li>Improved parallelisation efficiency</li>
+</ul><p>Please use the <a href="https://github.com/bioinformatics-centre/bayesembler/issues">GitHub issue tracking system</a> to request any features you would like us to implement.</p>
+
+<h2>
+<a name="installing-the-bayesembler" class="anchor" href="#installing-the-bayesembler"><span class="octicon octicon-link"></span></a>Installing the Bayesembler</h2>
+
+<p>The Bayesembler runs on both Linux and OS X and is freely available under the <a href="http://opensource.org/licenses/MIT">MIT License</a>. Static Linux x86_64 builds are available under releases (<a href="https://github.com/bioinformatics-centre/bayesembler/releases/download/v1.1.1/bayesembler_v1.1.1_linux_x86_64.tar.gz">latest release</a>). Please check out the <a href="https://github.com/bioinformatics-centre/bayesembler/wiki/Installation">installation-wiki</a> for further information including how to build the Bayesembler from source.</p>
+
+<h2>
+<a name="running-the-bayesembler" class="anchor" href="#running-the-bayesembler"><span class="octicon octicon-link"></span></a>Running the Bayesembler</h2>
+
+<h3>
+<a name="input" class="anchor" href="#input"><span class="octicon octicon-link"></span></a>Input</h3>
+
+<p>The Bayesembler requires <em>paired-end</em> RNA-seq data mapped using <a href="http://ccb.jhu.edu/software/tophat/index.shtml">TopHat2</a>.</p>
+
+<h3>
+<a name="assembly" class="anchor" href="#assembly"><span class="octicon octicon-link"></span></a>Assembly</h3>
+
+<p>The Bayesembler can be invoked with default settings using</p>
+
+<pre><code>bayesembler -b &lt;tophat2_map.bam&gt;
+</code></pre>
+
+<p>Important options include:</p>
+
+<ul>
+<li>
+<code>-s</code>: Data is strand-specific. Use <code>-s first</code> to indicate mate orientation as in the dUTP protocol or <code>-s second</code> to indicate opposite orientation. If not provided, the program assumes unstranded data (beware that performance on unstranded data is currently not optimal, we are working on improving this).</li>
+<li>
+<code>-p</code>: Number of threads used for assembly.</li>
+</ul><h3>
+<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h3>
+
+<p>Assembly in <a href="http://genome.ucsc.edu/FAQ/FAQformat.html#format4">Gene Annotation Format</a> (GTF) as <code>assembly.gtf</code>.</p>
+
+<p>Please consult the <a href="https://github.com/bioinformatics-centre/bayesembler/wiki/Manual">manual-wiki</a> for additional options and information about the output.</p>
+
+<h2>
+<a name="bug-reports-help-and-feature-requests" class="anchor" href="#bug-reports-help-and-feature-requests"><span class="octicon octicon-link"></span></a>Bug reports, help and feature requests</h2>
+
+<p>The <a href="https://github.com/bioinformatics-centre/bayesembler/issues">GitHub issue tracking system</a> can be used to report bugs and request help or new features. Please use <a href="mailto:bayesembler@binf.ku.dk">bayesembler@binf.ku.dk</a> for private communication only.</p>
+
+<h2>
+<a name="citation-and-credits" class="anchor" href="#citation-and-credits"><span class="octicon octicon-link"></span></a>Citation and credits</h2>
+
+<p>A manuscript describing the method has been accepted for publication; a reference to the paper will follow here as soon as it is published. The Bayesembler is being developed by Jonas Andreas Sibbesen, Lasse Maretty and Anders Krogh at the Bioinformatics Centre, a part of the <a href="http://www1.bio.ku.dk/binf/">Section for Computational and RNA Biology</a> at the <a href="http://www.ku.dk/english">University of Copenhagen</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Bayesembler maintained by <a href="https://github.com/bioinformatics-centre">bioinformatics-centre</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-44694489-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
