@@ -1,11 +1,11 @@
 
 /*
-assembler.cpp - This file is part of the Bayesembler (v1.1.1)
+assembler.cpp - This file is part of the Bayesembler (v1.2.0)
 
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Lasse Maretty and Jonas Andreas Sibbesen
+Copyright (c) 2015 Lasse Maretty and Jonas Andreas Sibbesen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -292,9 +292,10 @@ vector<pair<list<GraphInfo>, string> > Assembler::generateSpliceGraphs(double * 
     bam_nd_pe_minus_stream << "_nd_minus.bam";
     bam_nd_pe_unstranded_stream << "_nd_unstranded.bam";
 
-    string bam_nd_pe_plus_file_name = bam_nd_pe_plus_stream.str();
-    string bam_nd_pe_minus_file_name = bam_nd_pe_minus_stream.str();
-    string bam_nd_pe_unstranded_file_name = bam_nd_pe_unstranded_stream.str();
+    string bam_nd_pe_plus_file_name = options_variables.output_prefix + bam_nd_pe_plus_stream.str();
+    string bam_nd_pe_minus_file_name = options_variables.output_prefix + bam_nd_pe_minus_stream.str();
+    string bam_nd_pe_unstranded_file_name = options_variables.output_prefix + bam_nd_pe_unstranded_stream.str();
+    cout << "bam_nd_pe_plus_file_name" << bam_nd_pe_plus_file_name << endl;
          
     assert(boost::filesystem::exists(options_variables.bam_file));  
     
@@ -1744,15 +1745,18 @@ void Assembler::fragmentLengthCallback(deque< pair<list<string>, vector<Fragment
 
 void Assembler::outputCallback(deque<AssemblyInfo *> * output_queue, boost::mutex * output_lock, int * output_remaining_graphs, int num_graphs) {
 
-    ofstream ensemble_file("assembly.gtf");
+    string ensemble_filename = options_variables.output_prefix + string("assembly.gtf");
+    ofstream ensemble_file(ensemble_filename.c_str());
     ofstream candidates_file;
     ofstream log_file;
 
-
     if (options_variables.output_mode == "full") {
 
-        candidates_file.open("candidates.gtf");
-        log_file.open("graph_logs.txt");   
+        string candidates_filename = options_variables.output_prefix + string("candidates.gtf");
+        string log_filename = options_variables.output_prefix + string("graph_logs.txt");
+
+        candidates_file.open(candidates_filename.c_str());
+        log_file.open(log_filename.c_str());   
     }
 
     vector <int> stats_list(8,0);
@@ -1960,7 +1964,9 @@ void Assembler::runBayesemblerThreaded() {
 
         if (options_variables.output_mode == "full") {
 
-            ofstream fragment_length_file("fragment_lengths.txt");
+            string fragment_length_filename = options_variables.output_prefix + string("fragment_lengths.txt");
+            ofstream fragment_length_file(fragment_length_filename.c_str());
+            
             fragment_length_file << "length\tcount" << endl;
 
             for (map<uint,uint>::iterator output_map_it = output_map.begin(); output_map_it != output_map.end(); output_map_it++) {

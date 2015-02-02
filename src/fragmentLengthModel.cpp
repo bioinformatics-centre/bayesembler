@@ -1,11 +1,11 @@
 
 /*
-fragmentLengthModel.cpp - This file is part of the Bayesembler (v1.1.1)
+fragmentLengthModel.cpp - This file is part of the Bayesembler (v1.2.0)
 
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Lasse Maretty and Jonas Andreas Sibbesen
+Copyright (c) 2015 Lasse Maretty and Jonas Andreas Sibbesen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,11 @@ double GaussianFragmentLengthModel::estimateMedian(map<DataType,uint> observatio
 		observation_count += observation_iter->second;
 	}
 
-	assert(observation_count > 0);
+	if (observation_count == 0) {
+
+		cout << "ERROR: Insufficient number of observations for estimating the fragment length distribution parameters. Please specify these manually using the --frag-mean and --frag-sd options." << endl;
+		exit(1);
+	}
 
 	// Find median observation index for uneven observation number and first median observation for even observation number
 	int median_observation_idx;
@@ -145,9 +149,10 @@ pair<double,double> GaussianFragmentLengthModel::estimateParameters(map<uint,uin
 
 	double median_abs_deviation = estimateMedian(abs_distances);
 
-	if (observation_count < 10000) {
+	if (observation_count < 1000) {
 
-		cout << "\n[" << getLocalTime() << "] WARNING: Only " << observation_count << " observation(s) were used for estimation of the fragment length distribution!\n" << endl;
+		cout << "ERROR: Insufficient number of observations for estimating the fragment length distribution parameters. Please specify these manually using the --frag-mean and --frag-sd options." << endl;
+		exit(1);
 	}
 
 	cout << "[" << getLocalTime() << "] Estimated fragment length \"median\"=" << median << " and \"median absolute deviation\"=" << median_abs_deviation << " using " << observation_count << " observations" << endl;
